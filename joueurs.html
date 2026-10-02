@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d18">
+  <meta name="description" content="Découvrez les seize joueurs de la VALORIA CUP.">
+  <title>Joueurs — VALORIA CUP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="VALORIA CUP, accueil"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <a class="nav-link" href="index.html">Accueil</a><a class="nav-link" href="bracket.html">Bracket</a><a class="nav-link" href="matchs.html">Matchs</a><a class="nav-link active" href="joueurs.html" aria-current="page">Joueurs</a>
+    </nav>
+    <a class="header-cta" href="bracket.html">Voir le tournoi <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="section-wrap page-hero-inner">
+        <p class="eyebrow"><span class="live-dot"></span> VALORIA CUP · EFFECTIF</p>
+        <h1>Les joueurs<span class="heading-period">.</span></h1>
+        <p class="page-subtitle">Seize concurrents, un seul face-à-face à la fois.</p>
+      </div>
+    </section>
+    <section class="players-section page-content" aria-labelledby="players-title">
+      <div class="section-wrap">
+        <div class="section-heading section-heading-light">
+          <div><p class="eyebrow">16 JOUEURS · 1 OBJECTIF</p><h2 id="players-title">Effectif officiel</h2></div>
+          <span class="section-number">VALORIA CUP</span>
+        </div>
+        <div class="players-grid" id="players-grid" aria-label="Liste des joueurs"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <p>LE FOOTBALL SE JOUE EN 1 VS 1.</p><a href="#top" class="back-top">RETOUR EN HAUT <span aria-hidden="true">↑</span></a>
+  </footer>
+  <script>
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[character]);
+    document.querySelector("#players-grid").innerHTML = tournament.players.map((player, index) => `
+      <article class="player-card">
+        <span class="player-card-number">${String(index + 1).padStart(2, "0")}</span>
+        <span class="player-avatar" aria-hidden="true">${escapeHTML(player.trim().split(/\s+/).map((part) => part[0]).join("").slice(0, 3).toUpperCase())}</span>
+        <span class="player-card-name">${escapeHTML(player)}</span>
+        <span class="player-card-tag">JOUEUR</span>
+      </article>
+    `).join("");
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#main-nav");
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      toggle.setAttribute("aria-label", expanded ? "Ouvrir le menu" : "Fermer le menu");
+      navigation.classList.toggle("is-open", !expanded);
+    });
+  </script>
+</body>
+</html>

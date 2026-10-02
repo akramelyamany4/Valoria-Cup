@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d18">
+  <meta name="description" content="Retrouvez les matchs en un contre un de la VALORIA CUP.">
+  <title>Matchs — VALORIA CUP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="VALORIA CUP, accueil"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <a class="nav-link" href="index.html">Accueil</a><a class="nav-link" href="bracket.html">Bracket</a><a class="nav-link active" href="matchs.html" aria-current="page">Matchs</a><a class="nav-link" href="joueurs.html">Joueurs</a>
+    </nav>
+    <a class="header-cta" href="bracket.html">Voir le tournoi <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="section-wrap page-hero-inner">
+        <p class="eyebrow"><span class="live-dot"></span> VALORIA CUP · FACE-À-FACE</p>
+        <h1>Les matchs<span class="heading-period">.</span></h1>
+        <p class="page-subtitle">Les confrontations du tournoi, en un contre un.</p>
+      </div>
+    </section>
+    <section class="section-wrap page-content" aria-labelledby="matches-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">LE PROGRAMME</p><h2 id="matches-title">Les affiches</h2></div>
+        <span class="section-number">1 CONTRE 1</span>
+      </div>
+      <div class="matches-grid" id="matches-grid"></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <p>LE FOOTBALL SE JOUE EN 1 VS 1.</p><a href="#top" class="back-top">RETOUR EN HAUT <span aria-hidden="true">↑</span></a>
+  </footer>
+  <script>
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[character]);
+    document.querySelector("#matches-grid").innerHTML = tournament.matches.map((match, index) => `
+      <article class="match-card">
+        <div class="match-card-heading"><span class="match-card-label">MATCH ${index + 1}</span><span class="match-card-mark" aria-hidden="true">VC</span></div>
+        <div class="match-card-contest">
+          <div class="match-card-player"><span>JOUEUR ${String(index * 2 + 1).padStart(2, "0")}</span><strong>${escapeHTML(match.player1)}</strong></div>
+          <span class="match-card-versus">VS</span>
+          <div class="match-card-player"><span>JOUEUR ${String(index * 2 + 2).padStart(2, "0")}</span><strong>${escapeHTML(match.player2)}</strong></div>
+        </div>
+        ${match.time ? `<time class="match-card-time">${escapeHTML(match.time)}</time>` : ""}
+      </article>
+    `).join("");
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#main-nav");
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      toggle.setAttribute("aria-label", expanded ? "Ouvrir le menu" : "Fermer le menu");
+      navigation.classList.toggle("is-open", !expanded);
+    });
+  </script>
+</body>
+</html>
