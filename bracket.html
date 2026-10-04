@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d18">
+  <meta name="description" content="Bracket du tournoi de football VALORIA CUP.">
+  <title>Bracket — VALORIA CUP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="VALORIA CUP, accueil"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <a class="nav-link" href="index.html">Accueil</a><a class="nav-link active" href="bracket.html" aria-current="page">Bracket</a><a class="nav-link" href="matchs.html">Matchs</a><a class="nav-link" href="joueurs.html">Joueurs</a>
+    </nav>
+    <a class="header-cta" href="matchs.html">Voir les matchs <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="section-wrap page-hero-inner">
+        <p class="eyebrow"><span class="live-dot"></span> <span data-tournament-name>VALORIA CUP</span></p>
+        <h1>Bracket<span class="heading-period">.</span></h1>
+        <p class="page-subtitle">Le tableau du tournoi, à suivre d’un seul regard.</p>
+      </div>
+    </section>
+    <section class="section-wrap bracket-page-content" aria-label="Bracket de la VALORIA CUP">
+      <div class="bracket-board-scroll" tabindex="0" aria-label="Tableau du tournoi, défilement horizontal possible">
+        <div class="bracket-board" id="bracket-board">
+          <svg class="bracket-connectors" aria-hidden="true" focusable="false"></svg>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <p>LE FOOTBALL SE JOUE EN 1 VS 1.</p><a href="#top" class="back-top">RETOUR EN HAUT <span aria-hidden="true">↑</span></a>
+  </footer>
+  <script>
+    document.querySelectorAll("[data-tournament-name]").forEach((element) => {
+      element.textContent = tournament.name;
+    });
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[character]);
+    const rounds = tournament.rounds && tournament.rounds.length ? tournament.rounds : [
+      {
+        title: "Huitièmes de finale",
+        matches: tournament.matches.map((match, index) => ({
+          label: `MATCH ${String(index + 1).padStart(2, "0")}`,
+          player1: match.player1,
+          player2: match.player2
+        }))
+      },
+      {
+        title: "Quarts de finale",
+        matches: Array.from({ length: 4 }, (_, index) => ({
+          label: `MATCH ${String(index + 9).padStart(2, "0")}`
+        }))
+      },
+      {
+        title: "Demi-finales",
+        matches: Array.from({ length: 2 }, (_, index) => ({
+          label: `MATCH ${String(index + 13).padStart(2, "0")}`
+        }))
+      },
+      {
+        title: "Finale",
+        matches: [{ label: "MATCH 15" }]
+      }
+    ];
+    const board = document.querySelector("#bracket-board");
+    const connectors = board.querySelector(".bracket-connectors");
+    board.insertAdjacentHTML("beforeend", rounds.map((round, roundIndex) => `
+      <section class="bracket-round bracket-round-${roundIndex + 1}" aria-label="${escapeHTML(round.title)}">
+        <h2>${escapeHTML(round.title)}</h2>
+        <div class="bracket-round-matches">
+          ${round.matches.map((match) => `
+            <article class="bracket-match">
+              <span class="bracket-match-id">${escapeHTML(match.label)}</span>
+              <div class="bracket-team"><span>${match.player1 ? escapeHTML(match.player1) : "À déterminer"}</span></div>
+              <span class="bracket-versus">VS</span>
+              <div class="bracket-team"><span>${match.player2 ? escapeHTML(match.player2) : "À déterminer"}</span></div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `).join(""));
+    function drawBracketConnectors() {
+      const boardBounds = board.getBoundingClientRect();
+      connectors.setAttribute("viewBox", `0 0 ${board.scrollWidth} ${board.scrollHeight}`);
+      connectors.setAttribute("width", board.scrollWidth);
+      connectors.setAttribute("height", board.scrollHeight);
+      connectors.replaceChildren();
+
+      rounds.slice(0, -1).forEach((round, roundIndex) => {
+        const sourceMatches = board.querySelectorAll(`.bracket-round-${roundIndex + 1} .bracket-match`);
+        const targetMatches = board.querySelectorAll(`.bracket-round-${roundIndex + 2} .bracket-match`);
+
+        targetMatches.forEach((targetMatch, index) => {
+          const first = sourceMatches[index * 2].getBoundingClientRect();
+          const second = sourceMatches[index * 2 + 1].getBoundingClientRect();
+          const target = targetMatch.getBoundingClientRect();
+          const x1 = first.right - boardBounds.left + board.scrollLeft;
+          const x2 = second.right - boardBounds.left + board.scrollLeft;
+          const y1 = first.top + first.height / 2 - boardBounds.top + board.scrollTop;
+          const y2 = second.top + second.height / 2 - boardBounds.top + board.scrollTop;
+          const targetX = target.left - boardBounds.left + board.scrollLeft;
+          const targetY = target.top + target.height / 2 - boardBounds.top + board.scrollTop;
+          const middleX = (x1 + targetX) / 2;
+          const connector = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          connector.setAttribute("d", `M ${x1} ${y1} H ${middleX} M ${x2} ${y2} H ${middleX} M ${middleX} ${y1} V ${y2} M ${middleX} ${targetY} H ${targetX}`);
+          connector.setAttribute("class", "bracket-connector");
+          connectors.append(connector);
+        });
+      });
+    }
+    drawBracketConnectors();
+    window.addEventListener("resize", drawBracketConnectors);
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(drawBracketConnectors).observe(board);
+    }
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#main-nav");
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      toggle.setAttribute("aria-label", expanded ? "Ouvrir le menu" : "Fermer le menu");
+      navigation.classList.toggle("is-open", !expanded);
+    });
+  </script>
+</body>
+</html>
