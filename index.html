@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d18">
+  <meta name="description" content="VALORIA CUP — tournoi de football en face-à-face.">
+  <title>VALORIA CUP — Tournoi de football</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="VALORIA CUP, accueil"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Ouvrir le menu"><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <a class="nav-link active" href="index.html" aria-current="page">Accueil</a>
+      <a class="nav-link" href="bracket.html">Bracket</a>
+      <a class="nav-link" href="matchs.html">Matchs</a>
+      <a class="nav-link" href="joueurs.html">Joueurs</a>
+    </nav>
+    <a class="header-cta" href="bracket.html">Voir le tournoi <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero hero-champion">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> CHAMPIONNAT · TERMINÉ</p>
+        <h1>VALORIA <span>CHAMPION</span></h1>
+        <p class="hero-subtitle"><span data-champion-name>A4li</span> — THE KING OF VALORIA</p>
+        <div class="hero-final-score"><span data-final-player="1">A4li</span> <span data-final-score="1">8</span>–<span data-final-score="2">2</span> <span data-final-player="2">Yusuf</span></div>
+        <div class="hero-bottom">
+          <a class="button button-primary" href="bracket.html">Voir le final <span aria-hidden="true">↘</span></a>
+          <p class="hero-note">TOURNOI TERMINÉ <span></span> 16 JOUEURS</p>
+        </div>
+      </div>
+      <span class="hero-index">01 <span>/ 04</span></span>
+    </section>
+
+    <section class="section-wrap grand-final" aria-labelledby="grand-final-title">
+      <div class="final-topline">
+        <span class="final-pill">FINAL MATCH</span>
+        <span class="final-status">COMPLETED</span>
+      </div>
+      <div class="final-header">
+        <div>
+          <p class="eyebrow final-eyebrow">OFFICIAL RESULT</p>
+          <h2 id="grand-final-title">GRAND FINAL</h2>
+        </div>
+      </div>
+      <div class="final-scoreboard" aria-label="Résultat officiel de la finale">
+        <div class="final-side final-side-winner">
+          <span class="final-badge">CHAMPION</span>
+          <strong data-champion-name>A4li</strong>
+        </div>
+        <div class="final-score" aria-live="polite"><span data-final-score="1">8</span><span>–</span><span data-final-score="2">2</span></div>
+        <div class="final-side final-side-runner">
+          <span class="final-badge final-badge-runner">RUNNER-UP</span>
+          <strong>Yusuf</strong>
+        </div>
+      </div>
+      <p class="final-message">A4li dominates the final and claims the Valoria Championship!</p>
+      <div class="confetti-layer" aria-hidden="true"></div>
+    </section>
+
+    <section class="section-wrap quick-links" aria-label="Explorer le tournoi">
+      <a class="quick-link" href="bracket.html"><span class="quick-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h11v10H8zM29 28h11v10H29zM19 15h7a3 3 0 0 1 3 3v10m-10-8v10h10"></path></svg></span><span><small>LE PARCOURS</small><strong>Bracket</strong></span><span class="quick-arrow" aria-hidden="true">↗</span></a>
+      <a class="quick-link" href="matchs.html"><span class="quick-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"></circle><path d="m24 13 7 5-3 8h-8l-3-8 7-5Zm-7 5-7-2m4 13 6-3m10-8 7-2m-7 10 5 6m-17-3-1 8m9-8 7 3"></path></svg></span><span><small>LES FACE-À-FACE</small><strong>Matchs</strong></span><span class="quick-arrow" aria-hidden="true">↗</span></a>
+      <a class="quick-link" href="joueurs.html"><span class="quick-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="16" r="6"></circle><path d="M6 39v-3a12 12 0 0 1 24 0v3H6Zm26-18a6 6 0 1 0-3-11m5 18a10 10 0 0 1 8 10h-5"></path></svg></span><span><small>LES CONCURRENTS</small><strong>Joueurs</strong></span><span class="quick-arrow" aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="section-wrap home-matches">
+      <div class="section-heading">
+        <div><p class="eyebrow">LE PROGRAMME</p><h2>Les matchs<span class="heading-period">.</span></h2></div>
+        <a class="text-link" href="matchs.html">Voir tout <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="match-list" id="home-matches"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">V</span><span class="brand-name">VALORIA <b>CUP</b></span></a>
+    <p>LE FOOTBALL SE JOUE EN 1 VS 1.</p>
+    <a href="#top" class="back-top">RETOUR EN HAUT <span aria-hidden="true">↑</span></a>
+  </footer>
+
+  <script>
+    const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[character]);
+    document.querySelectorAll("[data-tournament-name]").forEach((element) => {
+      element.textContent = tournament.name;
+    });
+    document.querySelectorAll("[data-champion-name]").forEach((element) => {
+      element.textContent = tournament.champion;
+    });
+    document.querySelectorAll("[data-final-player]").forEach((element) => {
+      element.textContent = tournament.finalScore[`player${element.dataset.finalPlayer}`];
+    });
+    document.querySelectorAll("[data-final-score]").forEach((element) => {
+      element.textContent = tournament.finalScore[`score${element.dataset.finalScore}`];
+    });
+    document.querySelector(".final-side-runner strong").textContent = tournament.runnerUp;
+    const currentRound = (tournament.rounds && tournament.rounds[tournament.currentRoundIndex]) || tournament.rounds[tournament.rounds.length - 1];
+    const currentMatches = (currentRound && currentRound.matches ? currentRound.matches : []).filter((match) => match.player1 || match.player2);
+    document.querySelector("#home-matches").innerHTML = currentMatches.map((match) => {
+      const hasScore = typeof match.score1 === "number" && typeof match.score2 === "number";
+      return `
+        <a class="match-row ${hasScore ? "match-row-result" : ""}" href="matchs.html">
+          <span class="match-row-id">${escapeHTML(match.label || "MATCH")}</span>
+          <div class="match-row-contest"><strong>${escapeHTML(match.player1 || "À déterminer")}</strong><span class="match-row-divider">VS</span><strong>${escapeHTML(match.player2 || "À déterminer")}</strong></div>
+          ${hasScore ? `<time class="match-row-time">${match.score1} – ${match.score2}</time>` : `<time class="match-row-time">${escapeHTML(match.time || "À définir")}</time>`}
+        </a>
+      `;
+    }).join("");
+    const confettiLayer = document.querySelector(".confetti-layer");
+    if (confettiLayer && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const fragment = document.createDocumentFragment();
+      Array.from({ length: 28 }).forEach((_, index) => {
+        const piece = document.createElement("span");
+        piece.className = "confetti-piece";
+        piece.style.setProperty("--x", `${Math.random() * 100}%`);
+        piece.style.setProperty("--delay", `${index * 0.12}s`);
+        piece.style.setProperty("--duration", `${4 + Math.random() * 2.2}s`);
+        piece.style.setProperty("--drift", `${-18 + Math.random() * 36}px`);
+        piece.style.setProperty("--hue", `${42 + Math.random() * 16}`);
+        fragment.appendChild(piece);
+      });
+      confettiLayer.appendChild(fragment);
+
+      const finalSection = confettiLayer.closest(".grand-final");
+      if ("IntersectionObserver" in window && finalSection) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            finalSection.classList.add("is-celebrating");
+            observer.disconnect();
+          }
+        }, { threshold: 0.25 });
+        observer.observe(finalSection);
+      } else if (finalSection) {
+        finalSection.classList.add("is-celebrating");
+      }
+    }
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#main-nav");
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      toggle.setAttribute("aria-label", expanded ? "Ouvrir le menu" : "Fermer le menu");
+      navigation.classList.toggle("is-open", !expanded);
+    });
+  </script>
+</body>
+</html>
